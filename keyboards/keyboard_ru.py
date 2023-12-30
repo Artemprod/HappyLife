@@ -1,6 +1,6 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from aiogram.utils.keyboard import ReplyKeyboardBuilder, ReplyKeyboardMarkup
-from lexicon.lexicon_ru import LEXICON_RU
+from lexicon.LEXICON_RU import LEXICON_RU
 
 button_further: KeyboardButton = KeyboardButton(text=LEXICON_RU['further'], callback_data='next_step')
 # button_goback: KeyboardButton = KeyboardButton(text = LEXICON_RU['go_back'], callback_data='go_back')

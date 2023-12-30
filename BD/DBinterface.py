@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from BD.MongoDB.mongo_enteties import Client
+from BD.MongoDB.mongo_enteties import Client, UserPrompt
 
 
 class ClientRepository(ABC):
@@ -85,6 +85,8 @@ class ProblemsRepository(ABC):
     @abstractmethod
     def get_woman_problems(self):
         pass
+
+
 
 
 class MongoDataBaseRepositoryInterface(ABC):

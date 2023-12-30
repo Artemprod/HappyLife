@@ -9,7 +9,7 @@ from config_data.config import MongoDB
 from container import data_base_controller
 from keyboards.callback_fabric import CommonBeliefsCallbackFactory, CategoryBeliefsCallbackFactory, StartBeliefsFactory, \
     ExistingBeliefsCallbackFactory
-from lexicon.lexicon_ru import LEXICON_RU, emoji_dict
+from lexicon.LEXICON_RU import LEXICON_RU, emoji_dict
 
 
 def create_start_practice_kb(belief_id) -> InlineKeyboardMarkup:
@@ -96,7 +96,6 @@ def create_define_way(database: MongoDataBaseRepositoryInterface, user_telegram_
         return kp_builder.as_markup()
 
     is_belief = database.client_repository.check_clients_belief_in_database(user_telegram_id)
-    print()
     return return_keyboard_for_existing_user() if is_belief else return_keyboard_for_new_user()
 
 
@@ -145,7 +144,6 @@ def crete_category_keyboard(data_base_controller: MongoDataBaseRepositoryInterfa
     kp_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
     tell_beliefs = InlineKeyboardButton(text=f"{LEXICON_RU['tell_beliefs']}", callback_data='tell_beliefs')
     back = InlineKeyboardButton(text=f"⬅ Назад ", callback_data=user.gender)
-    print('пол юзера:', user.gender)
     if user.gender == 'male':
         problems: list[Problem] = data_base_controller.problem_repository.get_man_problems()
     else:
@@ -277,7 +275,7 @@ def crete_keyboard_chose_belief_for_woman(category: str,
     return kp_builder.as_markup()
 
 
-def crete_keyboard_chose_existing_belief_for_man(user_telegram_id: int,
+def crete_keyboard_chose_existing_belief(user_telegram_id: int,
                                                  data_base_controller: MongoDataBaseRepositoryInterface):
     # Из за ограничения в 64 символа передаю только id загона. по этому id можно извлечь название из базы
     kp_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()

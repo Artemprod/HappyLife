@@ -13,7 +13,7 @@ from aiogram import Bot
 from pydub import AudioSegment
 
 from container import root_dir
-from lexicon.lexicon_ru import LEXICON_RU
+from lexicon.LEXICON_RU import LEXICON_RU
 
 
 async def save_user_if_not_exist(message: Message, data_base: MongoDataBaseRepositoryInterface) -> None:

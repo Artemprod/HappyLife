@@ -47,3 +47,12 @@ class Problem(Document):
     meta = {
         'collection': 'Problems'  # Здесь указывается имя коллекции
     }
+
+
+class UserPrompt(Document):
+    type = StringField()
+    prompt = StringField()
+
+    meta = {
+        'collection': 'UserPrompt'  # Здесь указывается имя коллекции
+    }

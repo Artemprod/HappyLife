@@ -3,19 +3,19 @@ from datetime import datetime
 from mongoengine import connect, DoesNotExist
 from BD.DBinterface import ClientRepository, ProblemsRepository, MongoDataBaseRepositoryInterface
 from BD.MongoDB.datat_enteties import Belief, Dialog
-from BD.MongoDB.mongo_enteties import Client, Problem
+from BD.MongoDB.mongo_enteties import Client, Problem, UserPrompt
 from config_data.config import MongoDB
 
 
 # TODO: Сюда можно всунуть пораждающий класс ( фабрика ) для создания конекта в зависимости от того где запущен бот ( докер, локал, сервер)
 class MongoORMConnection:
     def __init__(self, mongo: MongoDB):
-        # connect(db=mongo.bd_name,
-        #         host=mongo.docker_host,
-        #         port=int(mongo.docker_port))
         connect(db=mongo.bd_name,
-                host=mongo.local_host,
-                port=int(mongo.local_port))
+                host=mongo.docker_host,
+                port=int(mongo.docker_port))
+        # connect(db=mongo.bd_name,
+        #         host=mongo.local_host,
+        #         port=int(mongo.local_port))
 
 
 class MongoClientUserRepositoryORM(ClientRepository):
@@ -203,6 +203,18 @@ class MongoProblemsRepositoryORM(ProblemsRepository):
         while new_id in existing_id:
             new_id = random.randint(1000, 9999999)
         return new_id
+
+
+class PromptRepository:
+
+    @staticmethod
+    async def get_all_user_prompts() -> list[UserPrompt]:
+        return UserPrompt.objects(type='user')
+
+    @staticmethod
+    async def get_system_prompt():
+        print()
+        return UserPrompt.objects(type='system').get()
 
 class MediaRepositoryORM:
     ...

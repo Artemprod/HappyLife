@@ -4,7 +4,7 @@ import logging
 import os
 
 from BD.MongoDB.mongo_db import MongoClientUserRepositoryORM, \
-    MongoProblemsRepositoryORM, MongoDataBaseRepository, MongoORMConnection
+    MongoProblemsRepositoryORM, MongoDataBaseRepository, MongoORMConnection, PromptRepository
 
 from config_data.config import Config, load_config
 
@@ -18,6 +18,8 @@ MongoORMConnection(config.data_base)
 client_repo = MongoClientUserRepositoryORM()
 # создаем проблемный репозиторий
 problem_repo = MongoProblemsRepositoryORM()
+
+prompt_repo = PromptRepository()
 # Создаем общий репозиторий
 data_base_controller = MongoDataBaseRepository(client_repository=client_repo,
                                                problem_repository=problem_repo)
